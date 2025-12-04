@@ -1,0 +1,19 @@
+server:
+  port: 8888
+
+spring:
+  application:
+    name: spring-cloud-config-server
+
+  cloud:
+    config:
+      server:
+        git:
+          uri: https://github.com/garibaldii/spring-cloud-config-files.git
+          search-paths: configs
+          default-label: master
+
+
+#  profiles:
+#    active:
+#      - native
