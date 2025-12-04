@@ -26,7 +26,7 @@ jobs:
 
       - name: Build Eureka Naming Server Docker Image
         working-directory: ./service-registry-with-eureka/naming-server/naming-server
-        run: | 
+        run: |
           mvn clean package -DskipTests
           docker build -t garibaldii/naming-server:latest .
 
@@ -51,3 +51,13 @@ jobs:
       - name: Docker Compose Build
         working-directory: ./service-registry-with-eureka
         run: docker compose build
+
+      - name: Tag Docker Images
+        run: |
+          docker tag ${{secrets.DOCKER_USERNAME}}/naming-server:0.0.1-SNAPSHOT ${{secrets.DOCKER_USERNAME}}/naming-server:latest
+          docker tag ${{secrets.DOCKER_USERNAME}}/naming-server:0.0.1-SNAPSHOT ${{secrets.DOCKER_USERNAME}}/naming-server:${{github.RUN_ID}}
+
+     - name: Push Docker Images to Docker hub
+       run: |
+         docker push ${{secrets.DOCKER_USERNAME}}/naming-server:latest
+         docker push ${{secrets.DOCKER_USERNAME}}/naming-server:${{github.RUN_ID}}
