@@ -25,29 +25,29 @@ jobs:
           distribution: 'adopt' # See 'Supported distributions' for available options
 
       - name: Build Eureka Naming Server Docker Image
-        working-directory: ./service-registry with eureka/naming-server/naming-server
+        working-directory: ./service-registry-with-eureka/naming-server/naming-server
         run: | 
           mvn clean package -DskipTests
           docker build -t garibaldii/naming-server:latest .
 
       - name: Build Api Gateway Docker Image
-        working-directory: ./service-registry with eureka/api-gateway
+        working-directory: ./service-registry-with-eureka/api-gateway
         run: |
           mvn clean package -DskipTests
           docker build -t garibaldii/api-gateway:latest .
 
       - name: Build Book Service Docker Image
-        working-directory: ./service-registry with eureka/ms/book-service
+        working-directory: ./service-registry-with-eureka/ms/book-service
         run: |
           mvn clean package -DskipTests
           docker build -t garibaldii/book-service:latest .
 
       - name: Build Exchange Service Docker Image
-        working-directory: ./service-registry with eureka/ms/exchange-service
+        working-directory: ./service-registry-with-eureka/ms/exchange-service
         run: |
           mvn clean package -DskipTests
           docker build -t garibaldii/exchange-service:latest .     
 
       - name: Docker Compose Build
-        working-directory: ./service-registry with eureka
+        working-directory: ./service-registry-with-eureka
         run: docker compose build
