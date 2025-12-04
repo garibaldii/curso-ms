@@ -28,7 +28,7 @@ jobs:
         working-directory: ./service-registry-with-eureka/naming-server/naming-server
         run: |
           mvn clean package -DskipTests
-          docker build -t garibaldii/naming-server:latest .
+          docker build -t garibaldii/naming-server:0.0.1-SNAPSHOT .
 
       - name: Build Api Gateway Docker Image
         working-directory: ./service-registry-with-eureka/api-gateway
