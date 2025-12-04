@@ -17,3 +17,15 @@ jobs:
         with:
           username: ${{secrets.DOCKER_USERNAME}}
           password: ${{secrets.DOCKER_ACCESS_TOKEN}}
+
+      - name: Setup Java 21
+        uses: actions/setup-java@v5
+        with:
+          java-version: '21'
+          distribution: 'adopt' # See 'Supported distributions' for available options
+
+      - name: Build Eureka Naming Server Docker Image
+        working-directory: ./service-registry with eureka/naming-server/naming-server
+        run: | 
+          mvn clean package -DskipTests
+          docker build -t garibaldii/naming-server:latest .
